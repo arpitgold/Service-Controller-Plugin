@@ -1,63 +1,17 @@
-<project>
-	<modelVersion>4.0.0</modelVersion>
-    <name>Windows Service Control Plugin</name>
-	<groupId>blaisdell</groupId>
-	<artifactId>hudson-plugin-windows-service-control</artifactId>
-	<packaging>hpi</packaging>
-	<version>1.0.0</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>plugin</artifactId>
+    <version>1.509.2</version><!-- which version of Jenkins is this plugin built against? -->
+  </parent>
 
-	<dependencies>
+  <groupId>org.jenkins-ci.plugins</groupId>
+  <artifactId>Windows-Service-Controller</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>hpi</packaging>
 
-		<!-- Replace 1.90 with any version of Hudson that you'd like to develop 
-			against. -->
-		<dependency>
-			<groupId>org.jvnet.hudson.main</groupId>
-			<artifactId>hudson-core</artifactId>
-			<version>1.395</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jvnet.hudson.main</groupId>
-			<artifactId>hudson-war</artifactId>
-			<version>1.395</version>
-			<classifier>war-for-test</classifier>
-			<scope>test</scope>
-		</dependency>
-        <dependency>
-            <groupId>org.jvnet.hudson.main</groupId>
-            <artifactId>hudson-war</artifactId>
-            <version>1.395</version>
-            <type>war</type>
-            <scope>test</scope>
-        </dependency>	
-		<dependency>
-			<groupId>org.jvnet.hudson.main</groupId>
-			<artifactId>hudson-test-harness</artifactId>
-			<version>1.395</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<!-- Since new versions need to overwrite old versions, it's better not 
-			to have version number in the .hpi file name. -->
-		<finalName>${project.artifactId}</finalName>
-		<defaultGoal>package</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>org.jvnet.hudson.tools</groupId>
-				<artifactId>maven-hpi-plugin</artifactId>
-				<version>1.57</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-			</plugin>
-		</plugins>
-	</build>
-
+  <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
@@ -72,4 +26,11 @@
     </pluginRepository>
   </pluginRepositories>
 
+  <properties>
+    <!--
+      explicitly specifying the latest version here because one we get from the parent POM
+      tends to lag behind a bit
+    -->
+    <maven-hpi-plugin.version>1.96</maven-hpi-plugin.version>
+  </properties>
 </project>
